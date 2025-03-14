@@ -1,4 +1,4 @@
-﻿using Livraria.Communication.Request;
+using Livraria.Communication.Request;
 using Livraria.Entities.books;
 using Livraria.Entities.GeneratorId;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +13,7 @@ public class BookstoreController : BaseController
     private static DictionaryOfBooks _dictionaryBooks = new DictionaryOfBooks();
 
     [HttpPost]
+    [Route("adicionar-livros")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult CreateBook([FromBody] RequestBooksJson request)
@@ -37,6 +38,7 @@ public class BookstoreController : BaseController
     }
 
     [HttpGet]
+    [Route("todos-os-livros")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetAll()
@@ -45,7 +47,7 @@ public class BookstoreController : BaseController
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route("buscar-Livros/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetById([FromRoute] string id)
@@ -55,7 +57,7 @@ public class BookstoreController : BaseController
     }
 
     [HttpPut]
-    [Route("{id}")]
+    [Route("atualizar-livro/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult UpdateBook([FromRoute] string id, [FromBody] RequestBooksJson request)
@@ -75,7 +77,7 @@ public class BookstoreController : BaseController
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("excluir-livro/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult DeleteBook([FromRoute] string id)
