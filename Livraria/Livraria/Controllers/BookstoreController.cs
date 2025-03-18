@@ -62,8 +62,6 @@ public class BookstoreController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult UpdateBook([FromRoute] string id, [FromBody] RequestBooksJson request)
     {
-        var dictionaryBooks = new DictionaryOfBooks();
-
         _dictionaryBooks.Shelf[id] = new RequestBooksJson
         {
             Title = request.Title,
@@ -82,8 +80,6 @@ public class BookstoreController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult DeleteBook([FromRoute] string id)
     {
-        var dictionaryBooks = new DictionaryOfBooks();
-
         _dictionaryBooks.Shelf.Remove(id);
 
         return Ok(_dictionaryBooks.Shelf);
